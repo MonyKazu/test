@@ -1,6 +1,12 @@
 <% if logged_in?%>
     <h1>home</h1>
     <h4>こんにちは,<%=current_user.name%>さん</h4>
+    <%@tweets.each do |tweet|%>
+        <div><%= image_tag tweet.user.image,size: "60x60" %><%=tweet.user.name%></div>
+        <div><%=tweet.content%></div>
+        <small><%=tweet.created_at%></small>
+        <hr>
+    <% end %>
 <% else %>
     <h4>ログインしてください</h4>
 <%end%>

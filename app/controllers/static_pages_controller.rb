@@ -1,5 +1,7 @@
 class StaticPagesController < ApplicationController
   def home
-    @hello = "こんにちは"
+    if logged_in?
+      @tweets = Tweet.all.order(created_at: "DESC")
+    end
   end
 end
