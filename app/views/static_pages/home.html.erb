@@ -1,12 +1,23 @@
 <% if logged_in?%>
     <h1>home</h1>
     <h4>こんにちは,<%=current_user.name%>さん</h4>
+    <%= form_with model:@new_tweet do |f| %>
+    <div class="field">
+        <%= f.text_area :content, placeholder: "Compose new tweet..." %>
+    </div>
+    <%= f.submit "Post" %>
+    <% end %>
+
     <%@tweets.each do |tweet|%>
         <div><%= image_tag tweet.user.image,size: "60x60" %><%=tweet.user.name%></div>
         <div><%=tweet.content%></div>
         <small><%=tweet.created_at%></small>
+        <% if tweet.user_id==current_user.id %>
+            <%= button_to '削除', "/tweets/#{tweet.id}", method: :delete %>
+        <% end %>
         <hr>
     <% end %>
+    
 <% else %>
     <h4>ログインしてください</h4>
 <%end%>
