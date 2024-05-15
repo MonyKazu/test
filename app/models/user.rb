@@ -4,7 +4,7 @@ class User < ApplicationRecord
     has_many :followings, through: :active_relationships, source: :followed
     has_many :passive_relationships, class_name:  "FollowRelationship", foreign_key: "followed_id", dependent:   :destroy
     has_many :followers, through: :passive_relationships, source: :follower
-    
+
     # ユーザーをフォローする
     def follow(other_user)
         unless self == other_user
@@ -21,5 +21,6 @@ class User < ApplicationRecord
     # 現在のユーザーがフォローしてたらtrueを返す
     def following?(other_user)
         self.followings.include?(other_user)
-    end    
+    end
+    
 end
