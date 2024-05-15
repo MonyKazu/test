@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/show'
+  get 'users/index'
   get "static_pages/home"
   root "static_pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -10,6 +12,9 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :tweets, only:[:create,:destroy]
+  get '/:nickname', to: 'users#show'
+  get 'users/index'
+
 
   # Defines the root path route ("/")
   # root "posts#index"
